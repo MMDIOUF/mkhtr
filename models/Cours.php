@@ -1,9 +1,12 @@
 <?php 
+namespace App\Models;
+
+use App\Core\Model;
 class Cours{
     private int $id;
     private string $heureDebut;
     private string $heureFin;
-    private DateTime $dateCours;
+    private \DateTime $dateCours;
 
 
     //ManyToOne =>Classe
@@ -12,12 +15,19 @@ class Cours{
        return new Classe();
     }
 
-    //ManyToOne =>Professeur
+    
     public function professeur():Professeur{
+        $sql="select u.* from cours c, 
+                  user u where c.professeur_id=u.id and c.id=? 
+                  and role like 'ROLE_PROFESSEUR ";
+                parent::selectWhere($sql,[$this->id],true);
         return new Professeur();
      }
      //ManyToOne =>Module
     public function module():Module{
+        $sql="select m.* from cours c, 
+                  module m where c.module_id=m.id and c.id=?";
+                 parent::selectWhere($sql,[$this->id],true);
         return new Module();
      }
      
