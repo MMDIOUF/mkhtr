@@ -1,19 +1,18 @@
 <?php 
-//RP herite de User
-class AC extends User{
-   
+namespace App\Models;
+class AC extends User {
+    
     public function __construct()
     {
-        $this->role="ROLE_AC";
+        parent::__construct();
+        parent::$role="ROLE_AC";
+        
     }
-    
-       /**
-       * Set the value of role
-       *
-       * @return  self
-       */ 
-       public function setRole($role)
-        {
-            return $this;
-        }
+
+    public static  function selectAll(){
+        $sql="select *  from  ".parent::$table." where role like ? ";
+       return parent::database()->executeSelect($sql,[parent::$role]);
+     }
+
+
 }
