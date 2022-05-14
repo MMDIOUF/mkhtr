@@ -1,0 +1,9 @@
+{
+    "name": "diouf/poo_mvc",
+    "autoload": {
+        "psr-4": {
+            "Diouf\\PooMvc\\": "src/"
+        }
+    },
+    "require": {}
+}
