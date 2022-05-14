@@ -1,4 +1,5 @@
 <?php
+namespace App\Models;
 class Etudiant extends User{
         
     private string $nomComplet;
@@ -13,6 +14,7 @@ class Etudiant extends User{
         
     
     public function __construct(){
+            
          
     }
 
