@@ -19,8 +19,8 @@ class Professeur  extends User{
     }
 
     //OneTo One  avec Adresse
-    public function adresse():Adresse|null{
-        return null;
+    public function adresse():Adresse{
+        return new Adresse;
     }
     /**
      * Get the value of grade
