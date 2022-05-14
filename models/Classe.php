@@ -10,6 +10,10 @@ class Classe{
     //OneToMany => Cours
     //Une Classe associee a plusieurs cours
     public function cours():array{
+        $sql="select c.* from cours c, 
+              classe cl where c.classe_id=cl.id and cl.id=? 
+              ";
+        parent::selectWhere($sql,[$this->id]);
         return [];
     }
     
