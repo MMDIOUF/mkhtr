@@ -1,18 +1,66 @@
-<?php 
-//Front controller
-//Url localhost:8000
+<?php
 
-//Chargement Manuel
-require_once("../models/User.php");
-require_once("../models/RP.php");
 
- $rp=new RP();
- $rp->setId(1)
-     ->setLogin("mouhamed")
-     ->setPassword("mmd");
 
-$rp->setRole("ROLE_AC");
-echo $rp->getRole();
+require_once("../vendor/autoload.php");
+
+
+
+// Une variable d'une classe
+//Manipuler un Objet=>
+//1-charger le fichier qui contient la classe
+//require_once("../models/User.php");
+//require_once("../models/RP.php");
+//2-Instancier l'objet
+//$user=new User();// fonction qui s'appelle le constructeur => __construct()
+//Donner un etat a l'objet=> donnez une valeur a ses attributs
+//-> Operateur de portee d'instance
+//$user-> : interface de la classe(Ensemble des methodes ou attributs publics )
+//$user->setId(1);
+
+//$cours=new Cours();
+
+//Autoloading => Chargement automatique
+ //Namespace => Packadge : ensemble de classe du meme domaine
+ //Namespace repertoire virtuel utiliser pour ranger nos classes
+   //namespace Model => ranger mes classes Models
+   //namespace Controllers => ranger mes classes controllers
+   //namespace Core(Configuration,Toutes les Classes Reutilisables)
+//Composer : Gestionnaires de Dependances
+    //Gestionnaire => Telecharger + Configurer une dependance dans votre projet
+    //Dependance => dossier core est une dependance(classes reutilisables) 
+        //https://packagist.org/
+        //Hub de dependance =>site beaucoup de dependance suivant le langage
+
+/* use App\Models\Module;
+use App\Models\RP;
+use App\Core\DataBase;
+use App\Exceptions\BdConnexionException;
+$rp =new RP(); */
+use App\Models\RP;
+$rp =new RP();
+$rp->setLogin("rp3");
+$rp->setPassword("rp");
+$rp->insert();
+echo "<pre>";
+RP::selectAll();
+var_dump(RP::selectById(1));
+echo "</pre>";
+
+/* use App\Models\Module;
+use App\Models\AC;
+use App\Core\DataBase;
+use App\Exceptions\BdConnexionException;
+$ac =new AC(); */
+use App\Models\RP;
+$ac =new RP();
+$ac->setLogin("ac3");
+$ac->setPassword("ac");
+$ac->insert();
+echo "<pre>";
+ac::selectAll();
+var_dump(AC::selectById(1));
+echo "</pre>";
 
 
 
