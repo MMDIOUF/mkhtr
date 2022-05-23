@@ -11,7 +11,8 @@ class SecuriteController extends Controller{
           //1-Affichage du Formulaire => GET
              //request
          //2-Soumission des donnees  => POST
-         if( $this->request->isGet()){       
+         if( $this->request->isGet()){  
+              $this->layout="connexion";     
               $this->render("securite/login");
          }
          if( $this->request->isPost()){
