@@ -1,23 +1,25 @@
-<?php 
-class Classe{
-    private int $id;
+<?php
+namespace App\Models; 
+ use App\Core\Model;
+class Classe extends Model{
+    private int $id;  
     private string $libelle;
-    private string $filiere;
     private string $niveau;
+    private string $filiere;
 
+    public function __construct()
+    {
+       // parent::$table="classe";
+    }
 
-    //Fonctions Navigationnelles => fonctions issues des association
-    //OneToMany => Cours
-    //Une Classe associee a plusieurs cours
-    public function cours():array{
+    //OneToMany avec Cours
+       //Un objet de type Classe contient plusieurs objets de type Cours
+       public function cours():array{
         $sql="select c.* from cours c, 
               classe cl where c.classe_id=cl.id and cl.id=? 
               ";
-        parent::selectWhere($sql,[$this->id]);
-        return [];
-    }
-    
-
+            return  parent::selectWhere($sql,[$this->id]);
+       }
     /**
      * Get the value of id
      */ 
@@ -59,6 +61,26 @@ class Classe{
     }
 
     /**
+     * Get the value of niveau
+     */ 
+    public function getNiveau()
+    {
+        return $this->niveau;
+    }
+
+    /**
+     * Set the value of niveau
+     *
+     * @return  self
+     */ 
+    public function setNiveau($niveau)
+    {
+        $this->niveau = $niveau;
+
+        return $this;
+    }
+
+    /**
      * Get the value of filiere
      */ 
     public function getFiliere()
@@ -78,23 +100,12 @@ class Classe{
         return $this;
     }
 
-    /**
-     * Get the value of niveau
-     */ 
-    public function getNiveau()
-    {
-        return $this->niveau;
-    }
-
-    /**
-     * Set the value of niveau
-     *
-     * @return  self
-     */ 
-    public function setNiveau($niveau)
-    {
-        $this->niveau = $niveau;
-
-        return $this;
+    public function insert(){
+         $sql="INSERT INTO  ".parent::table()."  (`libelle`, `filiere`, `niveau`) VALUES (?,?,?)";
+         return parent::database()->executeUpdate($sql,[
+                  $this->libelle,
+                  $this->filiere,
+                  $this->niveau,
+         ]);
     }
 }
