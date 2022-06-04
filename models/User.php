@@ -2,7 +2,8 @@
 
  namespace App\Models;
  use App\Core\Model;
-abstract class User extends Model{
+ 
+class User extends Model{
     //Attributs 
      protected int   $id;
      protected string $login;
@@ -13,7 +14,7 @@ abstract class User extends Model{
     //Constructeur
     public function __construct()
     {
-       parent::$table="user" ;
+
     }
     //Getters => Obtenir la valeur d'un attribut private ou protected
                 //a partir de l'interface de la classe
@@ -23,7 +24,7 @@ abstract class User extends Model{
 
     //Setters=> Modifie la valeur d'un attribut private ou protected
                 //a partir de l'interface de la classe
-    public function setId(int $id ):void{
+    public function setId($id ):void{
                $this->id=$id;   
     }
     
@@ -89,12 +90,21 @@ abstract class User extends Model{
      }
 
      public function insert(){
-         
           //die(parent::$table);
-          $sql="INSERT INTO  ".parent::$table."  (`login`, `password`,  `role`)
+          $sql="INSERT INTO  ".parent::table()."  (`login`, `password`,  `role`)
                VALUES ( ?, ?, ?);";
-              
          return parent::database()->executeUpdate($sql,[
                                                   $this->login,$this->password,self::$role]);
      }
+
+     public  function selectUserByLoginAndPassword(){
+           $sql="select * from user where login=? and password=?";
+           return parent::database()->executeSelect($sql,
+                                      [$this->login,$this->password],
+                                       true) ;
+     }
+
+
+
+     
 }
