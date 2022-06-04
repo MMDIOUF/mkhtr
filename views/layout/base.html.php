@@ -1,7 +1,8 @@
+<?php if(!$Role::isConnect()) redirectToRoute("");   ?>
+
 <?php    require_once(ROOT."views/partials/header.html.php"); ?>
 
-
-    <div class="wrapper     ">
+    <div class="wrapper ">
         <div class="sidebar-left  bg-dark">
                   <div class="top mt-2">
                       <img src="<?=WEB_URL?>/img/avatar.jpeg" alt="" srcset="">
@@ -16,7 +17,7 @@
                             <a href="#" class="list-group-item list-group-item-action position">Cours</a>
                             <a href="#" class="list-group-item list-group-item-action position">Inscription</a>
                             <a href="#" class="list-group-item list-group-item-action position">Professeur</a>
-                            <a href="#" class="list-group-item list-group-item-action position">Classe</a>
+                            <a href="<?=WEB_URL?>/classe" class="list-group-item list-group-item-action position">Classe</a>
                             <a href="#" class="list-group-item list-group-item-action position">Module</a>
                             <a href="#" class="list-group-item list-group-item-action position">Utilisateurs</a>
                    </div>
@@ -34,20 +35,13 @@
                         <a class="nav-link text-dark fs-6" href="#">Link</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled text-dark fs-6" href="#">Deconnexion</a>
+                        <a class="nav-link  text-dark fs-6" href="<?=WEB_URL?>/logout">Deconnexion</a>
                     </li>
                 </ul>
             </div>
             <div class="middle  d-flex justify-content-center">
-            <div class="card border-light my-3 w-75 shadow   " >
-                    <div class="card-header bg-transparent border-light bg-header">Header</div>
-                    <div class="card-body text-success">
-                       
-                        <div class="card-text">  <?=$content_for_views?>  </div>
-                    </div>
-                   
-                    </div>
-                
+            
+                 <?=$content_for_views?>  
                       
             </div>
         </div>
