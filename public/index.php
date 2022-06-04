@@ -3,7 +3,9 @@
 
 
 require_once("../vendor/autoload.php");
-
+require_once('./../core/constantes.php');
+require_once('./../core/fonctions.php');
+require_once("./../route/route.php");
 
 
 // Une variable d'une classe
@@ -36,7 +38,7 @@ require_once("../vendor/autoload.php");
 use App\Models\RP;
 use App\Core\DataBase;
 use App\Exceptions\BdConnexionException;
-$rp =new RP(); */
+$rp =new RP(); 
 use App\Models\RP;
 $rp =new RP();
 $rp->setLogin("rp3");
@@ -51,7 +53,7 @@ echo "</pre>";
 use App\Models\AC;
 use App\Core\DataBase;
 use App\Exceptions\BdConnexionException;
-$ac =new AC(); */
+$ac =new AC(); 
 use App\Models\RP;
 $ac =new RP();
 $ac->setLogin("ac3");
@@ -60,7 +62,8 @@ $ac->insert();
 echo "<pre>";
 ac::selectAll();
 var_dump(AC::selectById(1));
-echo "</pre>";
+echo "</pre>"; */
+
 
 
 
