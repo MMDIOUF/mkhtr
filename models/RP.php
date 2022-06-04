@@ -10,7 +10,7 @@ class RP extends User {
     }
 
     public static  function selectAll(){
-        $sql="select *  from  ".parent::$table." where role like ? ";
+        $sql="select *  from  ".parent::table()." where role like ? ";
        return parent::database()->executeSelect($sql,[parent::$role]);
      }
 
