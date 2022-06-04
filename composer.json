@@ -2,8 +2,17 @@
     "name": "diouf/poo_mvc",
     "autoload": {
         "psr-4": {
-            "Diouf\\PooMvc\\": "src/"
+            "App\\Models\\": "models/",
+            "App\\Core\\": "core/",
+            "App\\Controllers\\": "controllers/",
+            "App\\Exceptions\\": "exceptions/"
         }
-    },
+    
+
+    "require": {
+        "rakit/validation": "^1.4"
+    }
+}
+
     "require": {}
 }
