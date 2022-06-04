@@ -2,35 +2,48 @@
 namespace App\Models;
 
 use App\Core\Model;
-class Cours{
+
+class Cours extends Model{
     private int $id;
+    //Classe Php \ nameSpace Racine
+    private \DateTime $dateCours;
     private string $heureDebut;
     private string $heureFin;
-    private \DateTime $dateCours;
 
 
-    //ManyToOne =>Classe
-    //Plusieurs cours associes a une Classe
-    public function classe():Classe{
-       return new Classe();
+    public function __construct()
+    {
+   
     }
 
-    
-    public function professeur():Professeur{
-        $sql="select u.* from cours c, 
+
+    //Association
+     //ManyToOne avec Module
+        //un Objet de type Cours contient un objet de type Module
+        //Plusieurs Objet de type Cours sont associes a un objet de type Module
+        public function module():Module{
+            $sql="select m.* from cours c, 
+                  module m where c.module_id=m.id and c.id=?";
+                 parent::selectWhere($sql,[$this->id],true);
+            return new Module();
+        }
+      //ManyToOne avec Professeur
+        //un Objet de type Cours contient un objet de type Professeur
+        //Plusieurs Objet de type Cours sont associes a un objet de type Professeur
+
+        public function professeur():Professeur{
+            $sql="select u.* from cours c, 
                   user u where c.professeur_id=u.id and c.id=? 
                   and role like 'ROLE_PROFESSEUR ";
                 parent::selectWhere($sql,[$this->id],true);
-        return new Professeur();
-     }
-     //ManyToOne =>Module
-    public function module():Module{
-        $sql="select m.* from cours c, 
-                  module m where c.module_id=m.id and c.id=?";
-                 parent::selectWhere($sql,[$this->id],true);
-        return new Module();
-     }
-     
+            return new Professeur();
+        }
+       //ManyToOne avec Classe
+         //un Objet de type Cours contient un objet de type Classe
+        //Plusieurs Objet de type Cours sont associes a un objet de type Classe
+        public function classe():Classe{
+            return new Classe();
+        }
     /**
      * Get the value of id
      */ 
@@ -51,7 +64,25 @@ class Cours{
         return $this;
     }
 
-    
+    /**
+     * Get the value of dateCours
+     */ 
+    public function getDateCours()
+    {
+        return $this->dateCours;
+    }
+
+    /**
+     * Set the value of dateCours
+     *
+     * @return  self
+     */ 
+    public function setDateCours($dateCours)
+    {
+        $this->dateCours = $dateCours;
+
+        return $this;
+    }
 
     /**
      * Get the value of heureDebut
@@ -89,26 +120,6 @@ class Cours{
     public function setHeureFin($heureFin)
     {
         $this->heureFin = $heureFin;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of dateCours
-     */ 
-    public function getDateCours()
-    {
-        return $this->dateCours;
-    }
-
-    /**
-     * Set the value of dateCours
-     *
-     * @return  self
-     */ 
-    public function setDateCours($dateCours)
-    {
-        $this->dateCours = $dateCours;
 
         return $this;
     }
